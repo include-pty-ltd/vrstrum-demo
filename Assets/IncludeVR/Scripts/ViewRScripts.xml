@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ViewRScripts</name>
+    </assembly>
+    <members>
+        <member name="T:Include.UnityScript.ViewRCanvas">
+            <summary>
+            Controls position and display mode of canvas when a device starts streaming
+            </summary>
+        </member>
+        <member name="T:Include.UnityScript.UpdateSteamVROrigin">
+            <summary>
+            Monobehaviour for updating origin of SteamVR tracked device. This uses relfection to prevent dependency on SteamVR.
+            </summary>
+        </member>
+    </members>
+</doc>

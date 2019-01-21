@@ -1,0 +1,355 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ViewR</name>
+    </assembly>
+    <members>
+        <member name="T:Include.ViewRDataType">
+            <summary>
+            Datatype that is being sent into native backend
+            </summary>
+        </member>
+        <member name="T:Include.ViewRCameraController">
+            <summary>
+            Controller for ViewR's Cameras
+            </summary>
+        </member>
+        <member name="F:Include.ViewRCameraController.record">
+            <summary>
+            Tells this device to start recording (this is in beta, may cause game to crash)
+            </summary>
+        </member>
+        <member name="F:Include.ViewRCameraController.regenerateCameraOnSceneChange">
+            <summary>
+            If this is set to true, viewr cameras will be reconfigured based off whatever settings below every scene change. This is useful if you're messing around with fx and need to change the camera every scene change.This option was made so that as a plugin, it can be triggered automatically in modded games.
+            To trigger a camera refresh based on params in this class at any time, run RegenerateCamera()
+            </summary>
+        </member>
+        <member name="F:Include.ViewRCameraController.useMainCamera">
+            <summary>
+            If you're lazy, this option will just create cameras based off the main camera
+            Setting this field to true will override config file settings
+            </summary>
+        </member>
+        <member name="F:Include.ViewRCameraController.templateCamera">
+            <summary>
+            This is the game object that will be used as a "Camera"
+            Setting this field to anything but null will override config file settings
+            </summary>
+        </member>
+        <member name="F:Include.ViewRCameraController.cullingLayersToAdd">
+            <summary>
+            These layers will be added to the newly instantiated cameras
+            Setting any value in this field will override config file settings
+            </summary>
+        </member>
+        <member name="F:Include.ViewRCameraController.cullingLayersToRemove">
+            <summary>
+            These layers will be removed from the newly instantiated cameras
+            Setting any value in this field will override config file settings
+            </summary>
+        </member>
+        <member name="F:Include.ViewRCameraController.OnStartCamera">
+            <summary>
+            Event that is fired when a stream starts
+            </summary>
+        </member>
+        <member name="F:Include.ViewRCameraController.OnStopStream">
+            <summary>
+            Event that is fired when a stream is stopped
+            </summary>
+        </member>
+        <member name="M:Include.ViewRCameraController.GetCamera(Include.ViewRDataType)">
+            <summary>
+            Gets the camera specified
+            </summary>
+        </member>
+        <member name="P:Include.Input.HasOrigin">
+            <summary>
+            Whether Interface has a valid origin
+            </summary>
+        </member>
+        <member name="P:Include.Input.OriginPosition">
+            <summary>
+            The position of the tracking origin
+            </summary>
+        </member>
+        <member name="P:Include.Input.CalibrationOriginPosition">
+            <summary>
+            The position of the headset if placed on the floor in the origin space
+            </summary>
+        </member>
+        <member name="P:Include.Input.OriginScale">
+            <summary>
+            The scale of the origin
+            </summary>
+        </member>
+        <member name="P:Include.Input.OriginRotation">
+            <summary>
+            The rotation of the origin
+            </summary>
+        </member>
+        <member name="F:Include.Input.viewRInterface">
+            <summary>
+            Reference to the interface, just in case you needed it
+            </summary>
+        </member>
+        <member name="M:Include.Input.GetTouches">
+            <summary>
+            Gets all touches which are active at the beginning of this frame
+            </summary>
+            <returns>Dictionary of (Dictionary of Touches keyed with touchIds) keyed with deviceIds</returns>
+        </member>
+        <member name="M:Include.Input.GetTouches(System.Int32)">
+            <summary>
+            Gets all clients which have specified touchId active at the beginning of this frame
+            </summary>
+            <param name="touchId"></param>
+            <returns>Dictionary of touches, keyed with deviceIds</returns>
+        </member>
+        <member name="M:Include.Input.GetTouches(System.String)">
+            <summary>
+            Gets all touches of the specified clientId which are active at the beginning of this frame
+            </summary>
+            <param name="deviceId"></param>
+            <returns>Dictionary of Touches keyed with touchIds</returns>
+        </member>
+        <member name="M:Include.Input.GetTouches(System.String,System.Int32)">
+            <summary>
+            Gets the specified touch of the specified client if it is active at the beginning of this frame
+            </summary>
+            <param name="deviceId"></param>
+            <param name="touchId"></param>
+            <returns>Touch if found, else null</returns>
+        </member>
+        <member name="M:Include.Input.GetTouchers(UnityEngine.GameObject)">
+            <summary>
+             Gets information on which clients are touching this GameObject at the beginning of this frame
+            </summary>
+            <param name="gameObject">Object ID of object concerned</param>
+            <returns>Dictionary of clientsIds and touchIds which are touching the object</returns>
+        </member>
+        <member name="M:Include.Input.GetTouchers(System.Int32)">
+            <summary>
+             Gets information on which clients are touching this objectId at the beginning of this frame
+            </summary>
+            <param name="objectId">Object ID of object concerned</param>
+            <returns>Dictionary of clientsIds and their pointer indexes which are touching the object at the beginning of this frame</returns>
+        </member>
+        <member name="M:Include.Input.IsTouchedBy(UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary>
+            Gets whether or not specified object was touched by specified device
+            </summary>
+        </member>
+        <member name="M:Include.Input.IsTouchedBy(UnityEngine.GameObject,System.String)">
+            <summary>
+            Gets whether or not specified object was touched by specified device
+            </summary>
+        </member>
+        <member name="M:Include.Input.IsTouchedBy(System.Int32,UnityEngine.GameObject)">
+            <summary>
+            Gets whether or not specified object was touched by specified device
+            </summary>
+        </member>
+        <member name="M:Include.Input.IsTouchedBy(System.Int32,System.String)">
+            <summary>
+            Gets whether or not specified object was touched by specified device
+            </summary>
+        </member>
+        <member name="M:Include.Input.IsTouched(UnityEngine.GameObject)">
+            <summary>
+            Gets if gameObject is being touched at the beginning of this frame (note: this is slower than using IsTouched(int objectId);)
+            </summary>
+            <param name="gameObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Include.Input.IsTouched(System.Int32)">
+            <summary>
+            Gets if objectId is being touched at the beginning of this frame
+            </summary>
+            <param name="objectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Include.Input.OnTouch(System.Object,Include.VR.ViewR.Networking.DeviceTouchArgs)">
+            <summary>
+            This is for incoming touch messages from the Looking Glass Phone Client
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Include.Input.RegisterDevice(System.String,Include.DeviceInfo)">
+            <summary>
+            Used to allow a client to send touches and to connect its events up
+            </summary>
+            <param name="deviceId"></param>
+            <param name="info"></param>
+        </member>
+        <member name="M:Include.Input.DeregisterDevice(System.String)">
+            <summary>
+            Used remove a client when it disconnects
+            </summary>
+            <param name="deviceId"></param>
+            <param name="client"></param>
+        </member>
+        <member name="M:Include.Input.RegisterTouchable(UnityEngine.GameObject)">
+             <summary>
+             Use to register a touchable GameObject
+             
+            all touch objects registered after MAXIMUMID will be 0
+            this requires actually having 65400 active registered objects
+            the top 135 id's are reserved for overlays
+            
+             </summary>
+             <param name="gameObject"></param>
+             <returns>objectId associated with gameObject, 0 if it couldn't do so successfully</returns>
+        </member>
+        <member name="M:Include.Input.DeregisterTouchable(UnityEngine.GameObject)">
+            <summary>
+            Remove a formerly touchable object, making it untouchable
+            </summary>
+            <param name="gameObject"></param>
+        </member>
+        <member name="M:Include.Input.CleanUpInput">
+            <summary>
+            called at end of frame to make inputs consistent throughout each frame
+            </summary>
+        </member>
+        <member name="M:Include.Input.GetObjectId(UnityEngine.GameObject)">
+            <summary>
+            Gets the ObjectId of a gameObject if it's registered
+            </summary>
+            <param name="gameObject"></param>
+            <returns>ObjectId associated with gameObject, 0 if it can't find one</returns>
+        </member>
+        <member name="M:Include.Input.GetObject(System.Int32)">
+            <summary>
+            Gets the object associated with objectId
+            </summary>
+            <param name="objectId"></param>
+            <returns>GameObject associated with objectId, null if it can't find one</returns>
+        </member>
+        <member name="M:Include.Input.TryGetPose(System.String,System.Boolean,Include.Pose@)">
+            <summary>
+            If the device is internally tracked, this will return the pose which it is in
+            </summary>
+        </member>
+        <member name="T:Include.ViewRCamera">
+            <summary>
+            We use this to send unity camera data to your device
+            You should never have to create this directly
+            </summary>
+        </member>
+        <member name="P:Include.ViewRCamera.rt">
+            <summary>
+            The texture which this camera is sending to the device
+            </summary>
+        </member>
+        <member name="T:Include.TextureUpdateParams">
+            <summary>
+            Should be used in unity version 2017 and above to send stream info to the native backend.
+            Anything below 2017 cannot use this. As a result, currently no version of ViewR uses this, but it's here for future reference.
+            </summary>
+        </member>
+        <member name="T:Include.CapabilityRequestCallback">
+            <summary>
+            The delegate for when a capability request returns a result.
+            </summary>
+        </member>
+        <member name="T:Include.ViewRInterface">
+            <summary>
+            The interface to ViewR. There should only ever be one of these.
+            </summary>
+        </member>
+        <member name="F:Include.ViewRInterface.OnDeviceConnected">
+            <summary>
+            Event fired on when a device object is instantiated
+            </summary>
+        </member>
+        <member name="F:Include.ViewRInterface.OnDeviceDisconnect">
+            <summary>
+            Event fired on when a device object is disconnected
+            </summary>
+        </member>
+        <member name="P:Include.ViewRInterface.Target">
+            <summary>
+            Reference to the target transform (usually the hmd). If none is set and there's a config file, Interface will attempt to find the GameObject in game.
+            </summary>
+        </member>
+        <member name="P:Include.ViewRInterface.Origin">
+            <summary>
+            Reference to the origin transform (usually the playspace). If none is set and there's a config file, Interface will attempt to find the GameObject in game.
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.GetDevices">
+            <summary>
+            Gets list of connected device objects
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.GetDeviceIds">
+            <summary>
+            Gets list of connected device ids
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.GetConnectionIP(System.String)">
+            <summary>
+            Gets ip of connected device using device id
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.GetDevice(System.String)">
+            <summary>
+            Gets device using device id
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.GetDeviceId(UnityEngine.GameObject)">
+            <summary>
+            Gets device id using reference to object
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.GetDeviceCount">
+            <summary>
+            Gets number of connected devices
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.GetInstance">
+            <summary>
+            Gets current instance of ViewRInterface
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.RequestCapability(System.String,Include.VR.ViewR.Networking.Capability,System.Boolean,Include.CapabilityRequestCallback)">
+            <summary>
+            Requests device to turn on capability
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.RunOnMainThread(System.Collections.IEnumerator)">
+            <summary>
+            Runs a coroutine on the main thread, because unity
+            </summary>
+        </member>
+        <member name="M:Include.ViewRInterface.FindtrackingReferences">
+            <summary>
+            Searches for tracking references set in config and forces the new values into the properties
+            </summary>
+        </member>
+        <member name="T:Include.TouchIDRenderer">
+            <summary>
+            Monobehaviour that enables touch id rendering, this should all be automagic, in most cases, you shouldn't have to create this yourself
+            </summary>
+        </member>
+        <member name="P:Include.TouchIDRenderer.objectId">
+            <summary>
+            the object id (duh)
+            </summary>
+        </member>
+        <member name="T:Include.Convert">
+            <summary>
+            Static class for converting types
+            </summary>
+        </member>
+        <member name="M:Include.Convert.ToUnityTouchPhase(Include.VR.ViewR.Networking.Messages.TouchPhase)">
+            <summary>
+            This exists because I'm bad.
+            Converts our touch phases to unity touch phases (they're the same thing D:)
+            </summary>
+        </member>
+    </members>
+</doc>
