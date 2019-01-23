@@ -7,18 +7,17 @@ public class XRTracker : MonoBehaviour
     [
         Header("Number which the tracker is currently on."),
         Space(-10),
-        Header("This will can when you restart SteamVR"),
-        Space(-10),
-        Header("This is a backup for serial")
+        Header("This can change on VR system restarted")
     ]
     public int objectNumber;
-    [Header("SteamVR tracker serial")]
-    public string serial;
 
     private ulong uniqueId = 0;
     private List<XRNodeState> states = new List<XRNodeState>();
     private Vector3 pos = new Vector3();
     private Quaternion rot = new Quaternion();
+    private bool foundSerial = false;
+    private bool messageWritten = false;
+    private int previousObjectNumber = -1;
 
     [Header("Move object's position")]
     public bool position;
@@ -27,14 +26,6 @@ public class XRTracker : MonoBehaviour
 
     private void Start()
     {
-        InputTracking.GetNodeStates(states);
-        foreach (var state in states)
-        {
-            if (InputTracking.GetNodeName(state.uniqueID) == serial)
-            {
-                uniqueId = state.uniqueID;
-            }
-        }
     }
 
     // Update is called once per frame
@@ -42,7 +33,11 @@ public class XRTracker : MonoBehaviour
     {
         InputTracking.GetNodeStates(states);
 
-        Debug.Log("There are " + states.Count + " trackers");
+        // indication that we've changed a value
+        if (previousObjectNumber != objectNumber) {
+            previousObjectNumber = objectNumber;
+            messageWritten = false;
+        }
 
         //this is if we found the serial before
         if (uniqueId != 0)
@@ -67,7 +62,7 @@ public class XRTracker : MonoBehaviour
         }
 
         //fallback if we don't find the unique id
-        if (objectNumber < states.Count)
+        if (objectNumber < states.Count || objectNumber < 0)
         {
             if (position)
             {
@@ -79,6 +74,13 @@ public class XRTracker : MonoBehaviour
                 states[objectNumber].TryGetRotation(out rot);
                 transform.localRotation = transform.localRotation;
             }
+            if (!messageWritten) {
+                Debug.Log("Successfully set to object " + objectNumber);
+                messageWritten = true;
+            }
+        } else if (!messageWritten) {
+            Debug.Log("Object number out of range");
+            messageWritten = true;
         }
     }
 }
